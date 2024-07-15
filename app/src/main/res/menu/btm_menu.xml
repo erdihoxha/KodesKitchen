@@ -3,12 +3,15 @@
 
     <item android:title="Home"
         android:icon="@drawable/home"
+        android:id="@+id/homeFragment"
         />
     <item android:title="Favorites"
         android:icon="@drawable/favorites"
+        android:id="@+id/favoritesFragment"
         />
     <item android:title="Categories"
         android:icon="@drawable/categories"
+        android:id="@+id/categoriesFragment"
         />
 
 </menu>
