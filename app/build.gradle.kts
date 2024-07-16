@@ -33,6 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        viewBinding =  true
+    }
 }
 
 dependencies {
@@ -56,4 +59,11 @@ dependencies {
 
     // GIF
     implementation ("pl.droidsonroids.gif:android-gif-drawable:1.2.28")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.10.0")
+
+    // Glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 }
