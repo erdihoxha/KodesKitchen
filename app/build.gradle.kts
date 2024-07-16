@@ -40,6 +40,8 @@ android {
 
 dependencies {
     val nav_version = "2.7.7"
+
+//    val lifecycle_version = "2.4.0-rc01"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -66,4 +68,14 @@ dependencies {
 
     // Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+    //ViewModel MVVM
+
+//    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+//    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+//    implementation ("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
+    implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
+
+
+
 }
