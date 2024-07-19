@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.Query
 
 class HomeViewModel(
     private val mealDatabase: MealDatabase
@@ -25,6 +26,7 @@ class HomeViewModel(
     private var popularItemsLiveData = MutableLiveData<List<MealsByCategory>>()
     private var categoriesLiveData = MutableLiveData<List<Category>>()
     private var favoritesMealsLivedata = mealDatabase.mealDao().getAllMeals()
+    private val searchedMealsLiveData = MutableLiveData<List<Meal>>()
     fun getRandomMeal(){
         RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<MealList> {
             override fun onResponse(call: Call<MealList>, response: Response<MealList>) {
@@ -94,5 +96,23 @@ class HomeViewModel(
         viewModelScope.launch {
             mealDatabase.mealDao().upsert(meal)
         }
+
     }
+
+    fun searchMeals(searchQuery: String) = RetrofitInstance.api.searchMeals(searchQuery).enqueue(
+        object : Callback<MealList>{
+            override fun onResponse(p0: Call<MealList>, p1: Response<MealList>) {
+                val mealsList = p1.body()?.meals
+                mealsList?.let{
+                    searchedMealsLiveData.postValue(it)
+                }
+            }
+
+            override fun onFailure(p0: Call<MealList>, p1: Throwable) {
+                Log.d("HomeViewModel", p1.message.toString())
+            }
+
+        }
+    )
+    fun observeSearchedMealsLiveData() : LiveData<List<Meal>> = searchedMealsLiveData
 }
